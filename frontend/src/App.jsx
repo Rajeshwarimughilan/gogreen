@@ -12,7 +12,18 @@ function Header() {
   return (
     <header className="header">
       <h1>GoGreen</h1>
-      {isDashboard && <button onClick={() => navigate('/login')} className="logout-btn">Logout</button>}
+      {isDashboard && (
+        <button
+          onClick={() => {
+            localStorage.removeItem('token')
+            localStorage.removeItem('user')
+            navigate('/login')
+          }}
+          className="logout-btn"
+        >
+          Logout
+        </button>
+      )}
     </header>
   )
 }

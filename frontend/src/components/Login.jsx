@@ -1,21 +1,34 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { api } from '../api'
 
 export default function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Login:', { username, password })
-    navigate('/dashboard')
+    setError('')
+    try {
+      const data = await api('/login', {
+        method: 'POST',
+        body: JSON.stringify({ username, password })
+      })
+      localStorage.setItem('token', data.token)
+      localStorage.setItem('user', JSON.stringify(data.user))
+      navigate('/dashboard')
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   return (
     <div className="auth-container">
       <div className="auth-box">
         <h2>Login</h2>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <form onSubmit={handleSubmit}>
           <input 
             type="text" 

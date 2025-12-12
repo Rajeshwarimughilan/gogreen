@@ -1,22 +1,33 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { api } from '../api'
 
 export default function Register() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Register:', { username, email, password })
-    navigate('/dashboard')
+    setError('')
+    try {
+      await api('/register', {
+        method: 'POST',
+        body: JSON.stringify({ username, email, password })
+      })
+      navigate('/login')
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   return (
     <div className="auth-container">
       <div className="auth-box">
         <h2>Register</h2>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <form onSubmit={handleSubmit}>
           <input 
             type="text" 

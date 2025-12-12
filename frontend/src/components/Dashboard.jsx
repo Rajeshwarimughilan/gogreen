@@ -1,7 +1,34 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { api } from '../api'
 
 export default function Dashboard() {
   const [plants, setPlants] = useState([])
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      navigate('/login')
+      return
+    }
+    const fetchPlants = async () => {
+      try {
+        const data = await api('/plants')
+        setPlants(data)
+      } catch (err) {
+        setError(err.message)
+        // If auth failed, force logout and redirect
+        if (err.message.toLowerCase().includes('unauthorized') || err.message.toLowerCase().includes('invalid token')) {
+          localStorage.removeItem('token')
+          localStorage.removeItem('user')
+          navigate('/login')
+        }
+      }
+    }
+    fetchPlants()
+  }, [navigate])
 
   const handleAddPlant = (e) => {
     e.preventDefault()
@@ -12,18 +39,28 @@ export default function Dashboard() {
       wateringInterval: formData.get('watering'),
       sunlightRequirements: formData.get('sunlight')
     }
-    setPlants([...plants, newPlant])
-    e.target.reset()
+
+    api('/plants', {
+      method: 'POST',
+      body: JSON.stringify(newPlant)
+    })
+      .then((created) => {
+        setPlants([...plants, created])
+        setError('')
+        e.target.reset()
+      })
+      .catch((err) => setError(err.message))
   }
 
   return (
     <div className="plants-container">
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <div className="plants-grid">
         {plants.length === 0 ? (
           <p className="no-plants">No plants yet. Add one below!</p>
         ) : (
           plants.map((plant, idx) => (
-            <div key={idx} className="plant-card">
+            <div key={plant._id || idx} className="plant-card">
               <h3>{plant.title}</h3>
               <p><strong>Species:</strong> {plant.species}</p>
               <p><strong>Watering:</strong> {plant.wateringInterval}</p>
