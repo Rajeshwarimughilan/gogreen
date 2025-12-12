@@ -16,6 +16,9 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Serve static files from frontend
+app.use(express.static("public"));
+
 app.use(authRoutes);
 app.use(plantRoutes);
 
