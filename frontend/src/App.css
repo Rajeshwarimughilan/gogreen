@@ -1,0 +1,227 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f0f8f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8f4 100%);
+}
+
+.header {
+  background-color: #2d5a2d;
+  color: white;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.logout-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.logout-btn:hover {
+  background-color: #45a049;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 2rem;
+}
+
+.auth-box {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  border-top: 4px solid #4caf50;
+}
+
+.auth-box h2 {
+  color: #2d5a2d;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.auth-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-box input {
+  padding: 0.75rem;
+  border: 1px solid #c8e6c9;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #fafafa;
+  transition: border-color 0.2s;
+}
+
+.auth-box input:focus {
+  outline: none;
+  border-color: #4caf50;
+  background-color: white;
+}
+
+.auth-box button[type="submit"] {
+  padding: 0.75rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.auth-box button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.auth-box p {
+  text-align: center;
+  margin-top: 1rem;
+  color: #666;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #4caf50;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+.link-btn:hover {
+  color: #2d5a2d;
+}
+
+.plants-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.plants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.plant-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #66bb6a;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.plant-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.plant-card h3 {
+  color: #2d5a2d;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.plant-card p {
+  color: #555;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.plant-card strong {
+  color: #2d5a2d;
+}
+
+.no-plants {
+  grid-column: 1 / -1;
+  color: #999;
+  font-size: 1.1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.add-plant {
+  background: white;
+  padding: 2rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-top: 3px solid #4caf50;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.add-plant h2 {
+  color: #2d5a2d;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.add-plant form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-plant input {
+  padding: 0.75rem;
+  border: 1px solid #c8e6c9;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #fafafa;
+}
+
+.add-plant input:focus {
+  outline: none;
+  border-color: #4caf50;
+  background-color: white;
+}
+
+.add-plant button {
+  padding: 0.75rem;
+  background-color: #66bb6a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.add-plant button:hover {
+  background-color: #4caf50;
+}
